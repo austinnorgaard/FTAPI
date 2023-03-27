@@ -28,10 +28,9 @@ const getUserByUserName = (req, res) => {
 };
 
 const addUser = async (req, res) => {
-    const {id, subscribedToNewsletter, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, userName} = req.body;
+    const {id, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, userName} = req.body;
     var hashedPass = await bcrypt.hash(password, 10);
     var time = JSON.stringify(new Date());
-    var subscription = subscribedToNewsletter;
 
     if (!req.user) {
         pool.query(queries.checkEmailExists, [email], (err, result) => {
@@ -50,10 +49,7 @@ const addUser = async (req, res) => {
                                 newId = await pool.query(queries.getLastUser);
                                 newId = newId.rows[0].max + 1
                             }
-                            if (subscription == null) {
-                                subscription = false;
-                            }
-                            pool.query(queries.addUser, [newId, subscription, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, hashedPass, time, userName], (err, result) => {
+                            pool.query(queries.addUser, [newId, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, hashedPass, time, userName], (err, result) => {
                                 if (err) {
                                     throw err;
                                 };
@@ -87,9 +83,9 @@ const removeUser = (req, res) => {
 
 const editUser = (req, res) => {
     const name = req.params.username;
-    var {subscribedToNewsletter, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, createdAt, userName} = req.body;
-    var User = {subscribedToNewsletter, firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, createdAt, userName};
-    const properties = ["subscribedToNewsletter", "firstName", "lastName", "address1", "address2", "city", "state", "zipCode", "country", "phoneNumber", "email", "password", "createdAt", "userName"];
+    var {firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, createdAt, userName} = req.body;
+    var User = {firstName, lastName, address1, address2, city, state, zipCode, country, phoneNumber, email, password, createdAt, userName};
+    const properties = ["firstName", "lastName", "address1", "address2", "city", "state", "zipCode", "country", "phoneNumber", "email", "password", "createdAt", "userName"];
 
     if (req.user) {
         pool.query(queries.getUserByUserName, [name], async (err, result) => {
@@ -107,7 +103,7 @@ const editUser = (req, res) => {
                         User[prop]= row[prop];
                     }
                 }
-                pool.query(queries.editUser, [User.subscribedToNewsletter, User.firstName, User.lastName, User.address1, User.address2, User.city, User.state, User.zipCode, User.country, User.phoneNumber, User.email, User.password, User.createdAt, User.userName, row.id], (err, result) => {
+                pool.query(queries.editUser, [User.firstName, User.lastName, User.address1, User.address2, User.city, User.state, User.zipCode, User.country, User.phoneNumber, User.email, User.password, User.createdAt, User.userName, row.id], (err, result) => {
                     if (err) {
                         throw err;
                     };
