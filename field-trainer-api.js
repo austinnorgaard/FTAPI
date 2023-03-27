@@ -10,7 +10,7 @@ const initPass = require('./src/Auth/controller');
 const passport = require('passport');
 const flash = require('express-flash');
 
-const port = process.env.SERVER_PORT || 3300;
+const port = process.env.SERVER_PORT || 443;
 
 initPass(passport);
 
