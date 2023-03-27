@@ -1,8 +1,9 @@
 {
-  "name": "field-trainer-api",
+  "name": "@austinnorgaard/field-trainer-api",
   "version": "0.0.5",
   "description": "Backend services for Field Trainer Application",
   "main": "connection.js",
+  "repository": "https://github.com/austinnorgaard/FTAPI.git",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
 },
