@@ -9,8 +9,10 @@ const session = require('express-session');
 const initPass = require('./src/Auth/controller');
 const passport = require('passport');
 const flash = require('express-flash');
+const https = require('https')
 
-const port = process.env.SERVER_PORT || 443;
+
+const port = process.env.SERVER_PORT || 8080;
 
 initPass(passport);
 
@@ -30,9 +32,9 @@ app.use (express.json ());
 app.use(cors());
 app.use(flash());
 
-app.listen(port, () => {
-    console.log (`Server is now listening on port: ${port}`);
-});
+https.createServer({}, app).listen(port);
+
+console.log (`Server is now listening on port: ${port}`);
 
 app.get ('/', (req, res) => {
     res.sendStatus (200);
