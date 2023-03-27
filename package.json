@@ -4,9 +4,6 @@
   "description": "Backend services for Field Trainer Application",
   "main": "connection.js",
   "repository": "https://github.com/austinnorgaard/FTAPI.git",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-},
   "scripts": {
     "start": "node field-table-api.js",
     "test": "nodemon field-trainer-api.js"
