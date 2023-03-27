@@ -3,12 +3,11 @@
   "version": "0.0.6",
   "description": "Backend services for Field Trainer Application",
   "main": "connection.js",
-  "repository": "https://github.com/austinnorgaard/FTAPI.git",
   "scripts": {
     "start": "node field-table-api.js",
     "test": "nodemon field-trainer-api.js"
   },
-  "author": "Austin Norgaard <me@austinnorgaard.com>",
+  "author": "Austin Norgaard",
   "license": "ISC",
   "dependencies": {
     "async": "^3.2.4",
